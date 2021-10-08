@@ -13,6 +13,7 @@ const {
   getSearch,
   sortByCateg,
   getCategories,
+  getHelpers,
 } = require("../controllers/facilitatorController");
 
 router.get("/", getConcerns);
@@ -26,5 +27,6 @@ router.post("/sendEmail", sendEmail);
 router.get("/search", getSearch);
 router.get("/sort", sortByCateg);
 router.get("/categories", getCategories);
+router.get("/getHelper", getHelpers);
 
 module.exports = router;

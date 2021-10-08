@@ -54,18 +54,18 @@ const customStyles = {
   },
 };
 
-const url = "https://ascci.herokuapp.com";
+const url = "http://localhost:5000";
 
 const FacForum = () => {
   const classes = useStyles();
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const getHelpers = async () => {
+  const getReceivers = async () => {
     try {
-      const { data } = await axios.get(`${url}/Facilitator/concern/${id}`);
+      const { data } = await axios.get(`${url}/Facilitator/getHelper`);
 
-      setHelpers(data.existing.map((helper) => helper.email));
+      setHelpers(data.map((helper) => helper.email));
     } catch (error) {
       console.log("Err", error.message);
     }
@@ -85,12 +85,12 @@ const FacForum = () => {
 
   const [status, setStatus] = useState("");
 
-  const [helpers, setHelpers] = useState("");
+  const [helpers, setHelpers] = useState([]);
 
   const [content, setContent] = useState({
-    subject: concerns[0].subject,
-    body: concerns[0].body,
-    student: concerns[0].student,
+    subject: "",
+    body: "",
+    student: "",
     to: "",
   });
 
@@ -152,7 +152,7 @@ const FacForum = () => {
       dispatch(facStatus(id, status));
     } else if (id) {
       dispatch(facForum(id));
-      getHelpers(id);
+      getReceivers();
     }
   }, [id, dispatch, status]);
   return (
@@ -352,7 +352,18 @@ const FacForum = () => {
                     children
                     value={content.to}
                     onChange={(e) =>
-                      setContent({ ...content, to: e.target.value })
+                      setContent({
+                        subject: concerns
+                          .map((concern) => concern.subject)
+                          .toString(),
+                        body: concerns
+                          .map((concern) => concern.body)
+                          .toString(),
+                        student: concerns
+                          .map((concern) => concern.student)
+                          .toString(),
+                        to: e.target.value,
+                      })
                     }
                   >
                     {helpers.length &&

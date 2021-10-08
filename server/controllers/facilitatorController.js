@@ -13,15 +13,19 @@ const getConcerns = async (req, res) => {
 const getForum = async (req, res) => {
   const { id } = req.params;
 
-  const existing = await Users.find();
-
   try {
     const forum = await Concerns.findById(id);
 
-    res.status(200).json({ forum, existing });
+    res.status(200).json(forum);
   } catch (error) {
     console.log("Err", error.message);
   }
+};
+
+const getHelpers = async (req, res) => {
+  const existing = await Users.find();
+
+  res.status(200).json(existing);
 };
 
 const replyForum = async (req, res) => {
@@ -138,7 +142,7 @@ const sendEmail = async (req, res) => {
     new: true,
   });
 
-  res.json(emailSent)
+  res.json(emailSent);
 
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -198,4 +202,5 @@ module.exports = {
   getSearch,
   sortByCateg,
   getCategories,
+  getHelpers,
 };

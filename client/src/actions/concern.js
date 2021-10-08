@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://ascci.herokuapp.com";
+const url = "http://localhost:5000";
 
 export const createConcern = (concernData) => async (dispatch) => {
   try {
@@ -132,7 +132,7 @@ export const facForum = (id) => async (dispatch) => {
     dispatch({ type: "START_LOADING" });
     const { data } = await axios.get(`${url}/Facilitator/concern/${id}`);
 
-    dispatch({ type: "FAC_FORUM", payload: data.forum });
+    dispatch({ type: "FAC_FORUM", payload: data });
     dispatch({ type: "END_LOADING" });
   } catch (error) {
     console.log("Err", error.message);

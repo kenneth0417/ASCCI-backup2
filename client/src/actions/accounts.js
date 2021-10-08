@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://ascci.herokuapp.com";
+const url = "http://localhost:5000";
 
 export const adminGetAcc = () => async (dispatch) => {
   try {
