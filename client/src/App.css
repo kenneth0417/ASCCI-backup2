@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.sidebar {
+  z-index: 2;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+hr {
+  height: 3px;
+  border: none;
+  background-color: black;
+  margin-top: 0;
+}
+
+.sidebar {
+  z-index: 2;
+}
+
+.paginationBtn {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBtn a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid blue;
+  color: blue;
+  cursor: pointer;
+}
+
+.paginationBtn a:hover {
+  color: white;
+  background-color: blue;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: blue;
+}
+
+input {
+  display: none;
+}
+
+.modalBtn {
+  width: 2rem;
+  height: 1.5rem;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
