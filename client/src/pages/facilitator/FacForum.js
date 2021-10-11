@@ -54,7 +54,7 @@ const customStyles = {
   },
 };
 
-const url = "http://localhost:5000";
+const url = "https://ascci.herokuapp.com";
 
 const FacForum = () => {
   const classes = useStyles();
@@ -93,6 +93,8 @@ const FacForum = () => {
     student: "",
     to: "",
   });
+
+  const getContent = () => {};
 
   const handleContent = async (e) => {
     e.preventDefault();
@@ -353,6 +355,7 @@ const FacForum = () => {
                     value={content.to}
                     onChange={(e) =>
                       setContent({
+                        ...content,
                         subject: concerns
                           .map((concern) => concern.subject)
                           .toString(),
