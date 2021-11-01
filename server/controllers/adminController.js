@@ -1,5 +1,6 @@
 const Categories = require("../models/categories");
 const Concerns = require("../models/concern");
+const Semesters = require("../models/semester");
 const bcrypt = require("bcrypt");
 const Users = require("../models/user");
 const validator = require("validator");
@@ -139,7 +140,13 @@ const changeStatus = async (req, res) => {
 
   const { status } = req.body;
 
-  const setStatus = { status: status };
+  let date = "";
+
+  if (status !== "Pending") {
+    date = new Date().toISOString();
+  }
+
+  const setStatus = { status: status, dateEvaluated: date };
 
   const updatedConcern = await Concerns.findByIdAndUpdate(id, setStatus, {
     new: true,
@@ -283,6 +290,44 @@ const searchCategory = async (req, res) => {
   res.json(categs);
 };
 
+const createSemester = async (req, res) => {
+  const { semester } = req.body;
+
+  const newSem = new Semesters({ acadYear: semester });
+
+  const savedSem = await newSem.save();
+
+  res.json(savedSem);
+};
+
+const getSemester = async (req, res) => {
+  const semesters = await Semesters.find();
+
+  res.json(semesters);
+};
+
+const selectSemester = async (req, res) => {
+  const { selected } = req.body;
+
+  const update = { isActive: true };
+
+  await Semesters.findOneAndUpdate(
+    { isActive: true },
+    { isActive: false },
+    { new: true }
+  );
+
+  const selectedSem = await Semesters.findOneAndUpdate(
+    { acadYear: selected },
+    update,
+    { new: true }
+  );
+
+  const latest = await Semesters.find();
+
+  res.json(latest);
+};
+
 module.exports = {
   addCategory,
   register,
@@ -301,4 +346,7 @@ module.exports = {
   sortByCateg,
   searchAccount,
   searchCategory,
+  createSemester,
+  getSemester,
+  selectSemester,
 };

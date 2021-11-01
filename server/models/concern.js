@@ -30,6 +30,9 @@ const concernSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  dateEvaluated: {
+    type: Date,
+  },
   forum: {
     type: [Object],
     default: [],
@@ -41,6 +44,9 @@ const concernSchema = new mongoose.Schema({
   status: {
     type: String,
     default: "Pending",
+  },
+  acadYear: {
+    type: String,
   },
 });
 

@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Bar, Pie } from "react-chartjs-2";
 import moment from "moment";
 import { adminCateg } from "../../actions/categories";
+import { getSemesters } from "../../actions/semester";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { CircularProgress } from "@material-ui/core";
 
 const AdminReports = () => {
   const dispatch = useDispatch();
@@ -18,13 +18,51 @@ const AdminReports = () => {
     (state) => state.categories
   );
 
+  const { semesters, isLoading: semesterLoading } = useSelector(
+    (state) => state.semester
+  );
+
   const concernValues = [];
   const concernFreq = [];
   const categValues = [];
   const categFreq = [];
+  const semValues = [];
+  const semFreq = [];
 
   const [time, setTime] = useState("overall");
   const [categ, setCateg] = useState("");
+  const [sem, setSem] = useState("");
+
+  const semesterData = {
+    labels: semValues,
+    datasets: [
+      {
+        label: sem,
+        data: semFreq,
+        backgroundColor: ["rgba(255, 206, 86, 0.6)"],
+      },
+    ],
+  };
+
+  if (sem) {
+    const acad = concerns.filter((conc) => conc.acadYear === sem);
+
+    const semDates = acad
+      .map((test) => test.dateCreated)
+      .sort()
+      .map((test) => moment(test).format("LL"));
+
+    for (let i = 0; i < semDates.length; i++) {
+      let value = semDates[i];
+      if (semValues.includes(value)) {
+        let pos = semValues.indexOf(value);
+        semFreq[pos] += 1;
+      } else {
+        semValues.push(value);
+        semFreq.push(1);
+      }
+    }
+  }
 
   const concern = {
     labels: concernValues,
@@ -189,6 +227,7 @@ const AdminReports = () => {
   useEffect(() => {
     dispatch(allConcerns());
     dispatch(adminCateg());
+    dispatch(getSemesters());
   }, [dispatch]);
   return (
     <div>
@@ -233,6 +272,48 @@ const AdminReports = () => {
           }}
         />
       )}
+
+      <div style={{ marginTop: "50px" }}>
+        <NativeSelect
+          value={sem}
+          onChange={(e) => setSem(e.target.value)}
+          inputProps={{
+            name: "age",
+            id: "age-native-label-placeholder",
+          }}
+        >
+          <option style={{ display: "none" }}>Select a semester</option>
+          {semesters.map((sem, idx) => (
+            <option key={idx}>{sem.acadYear}</option>
+          ))}
+        </NativeSelect>
+        {semesterLoading ? (
+          <Bar
+            style={{
+              paddingLeft: "0",
+              paddingRight: "0",
+              marginLeft: "auto",
+              marginRight: "auto",
+              display: "block",
+              width: "800px",
+              height: "50vh",
+            }}
+          />
+        ) : (
+          <Bar
+            data={semesterData}
+            style={{
+              paddingLeft: "0",
+              paddingRight: "0",
+              marginLeft: "auto",
+              marginRight: "auto",
+              display: "block",
+              width: "800px",
+              height: "50vh",
+            }}
+          />
+        )}
+      </div>
 
       <div style={{ marginTop: "50px" }}>
         <NativeSelect

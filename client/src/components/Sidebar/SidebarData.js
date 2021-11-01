@@ -52,6 +52,12 @@ export const AdminData = [
     cName: "nav-text",
   },
   {
+    title: "Semester",
+    path: "/Admin/semester",
+    icon: <SettingsIcon />,
+    cName: "nav-text",
+  },
+  {
     title: "Settings",
     path: "/Admin/updateAccount",
     icon: <SettingsIcon />,

@@ -280,6 +280,23 @@ const RecUpdatePass = () => {
               ></Box>
             </Grid>
           </form>
+          <Modal
+            isOpen={modalOpen}
+            onRequestClose={() => setModalOpen(false)}
+            style={customStyles}
+          >
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <button className="modalBtn" onClick={() => setModalOpen(false)}>
+                X
+              </button>
+            </div>
+
+            <div style={{ margin: "20px" }}>
+              <p style={{ fontSize: "24px" }}>
+                Your password has been successfully changed.
+              </p>
+            </div>
+          </Modal>
         </Box>
       </div>
     </>

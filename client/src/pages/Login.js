@@ -46,9 +46,11 @@ const useStyles = makeStyles((theme) => ({
   },
   loginSide: {
     background: "#D8D9F6",
+    height: "100vh",
   },
   imageSide: {
     background: "#FEC00F",
+    height: "100vh",
   },
   ustlogo: {
     maxWidth: "20vh",
@@ -98,7 +100,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const url = "https://ascci.herokuapp.com";
+/* const url = "https://ascci.herokuapp.com"; */
+const url = "http://localhost:5000";
 
 const Login = () => {
   const classes = useStyles();
@@ -144,7 +147,7 @@ const Login = () => {
         res.profileObj.email.includes(".iics@ust.edu.ph") ||
         res.profileObj.email.includes(".cics@ust.edu.ph")
       ) {
-        alert("Success");
+        alert("Success! Welcome to ASCCI!");
         await axios.post(
           `${url}/auth/googlelogin`,
           { tokenId: res.tokenId },
@@ -154,7 +157,7 @@ const Login = () => {
 
         dispatch(getUser());
       } else {
-        alert("Unauthorized: Not an IICS/CICS account.");
+        alert("Failed! Not a valid IICS/CICS account.");
         history.push("/");
       }
     } catch (error) {
@@ -427,7 +430,7 @@ const Login = () => {
                                 Terms of Use and Privacy Policy
                               </h2>
                               <p id="transition-modal-description">
-                                Hehe gamitin mo, pag ayaw mo lagot ka kay kenet
+                                Lorem ipsum...
                               </p>
                             </div>
                           </Fade>

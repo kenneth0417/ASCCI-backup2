@@ -175,7 +175,17 @@ const requestReset = async (req, res) => {
     from: "asccifacilitator@gmail.com", // sender address
     to: email, // list of receivers
     subject: "ASCCI", // Subject line
-    html: `<b><a href="https://ascci-webapp.netlify.app/reset/${existingUser._id}">Click this link for password reset.</a></b>`, // html body
+    html: `<h2>Reset Password</h2>
+    <hr />
+    <p>Hello! We have received a request to reset the password of your account.<p>
+     <p>You can reset your password by clicking this <a href="https://ascci-webapp.netlify.app/reset/${existingUser._id}">link</a><p><br />
+       
+       <p>If the above method doesn't work, you can simply copy the URL below and paste it in your browser.</p>
+    <p>Link : <u>https://ascci-webapp.netlify.app/reset/${existingUser._id}</u><p><br />
+      
+    <p>We would like to thank you for using the application.</p>
+    <p>Regards,</p>
+    <p>ASCCI Team</p>`, // html body
   });
 
   console.log("Message sent: %s", info.messageId);

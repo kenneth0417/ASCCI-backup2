@@ -1,5 +1,6 @@
 const Concerns = require("../models/concern");
 const Categories = require("../models/categories");
+const Semesters = require("../models/semester");
 
 const getConcerns = async (req, res) => {
   const { email } = req.query;
@@ -72,7 +73,13 @@ const createConcern = async (req, res) => {
     Concerns.countDocuments({}, async (err, count) => {
       if (err) return console.log(err.message);
 
-      const ticket = `${year}-${concern.conCategory}-${count}`;
+      let ticket = "";
+
+      if (count <= 8) {
+        ticket = `${year}-${concern.conCategory}-00${count + 1}`;
+      } else if (count >= 9) {
+        ticket = `${year}-${concern.conCategory}-0${count + 1}`;
+      }
 
       const newConcern = new Concerns({
         ticket,
@@ -87,10 +94,15 @@ const createConcern = async (req, res) => {
       const filename = concern.filename;
       const time = new Date().toISOString();
 
-      const testing = { email, text, time, filename, attachment };
+      if (attachment === null) {
+        const testing = { email, text, time };
+        newConcern.forum.push(testing);
+      } else {
+        const testing = { email, text, time, filename, attachment };
+        newConcern.forum.push(testing);
+        newConcern.attachments.push(attachment);
+      }
 
-      newConcern.forum.push(testing);
-      newConcern.attachments.push(attachment);
       await newConcern.save();
 
       res.json(newConcern);
@@ -100,10 +112,17 @@ const createConcern = async (req, res) => {
   }
 };
 
+const getSemester = async (req, res) => {
+  const semesters = await Semesters.findOne({ isActive: true });
+
+  res.json(semesters);
+};
+
 module.exports = {
   createConcern,
   getConcerns,
   getCategories,
   getForum,
   replyForum,
+  getSemester,
 };

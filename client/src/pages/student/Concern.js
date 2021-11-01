@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createConcern } from "../../actions/concern";
 import { getCategories } from "../../actions/categories";
+import { studGetSemesters } from "../../actions/semester";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Modal from "react-modal";
 
@@ -59,6 +60,8 @@ const Concern = () => {
 
   const { category } = useSelector((state) => state.categories);
 
+  const { semesters, isLoading } = useSelector((state) => state.semester);
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const [subject, setSubject] = useState("");
@@ -71,7 +74,7 @@ const Concern = () => {
 
   const [body, setBody] = useState("");
 
-  const [attachment, setAttachment] = useState("");
+  const [attachment, setAttachment] = useState(null);
 
   const [filename, setFilename] = useState("");
 
@@ -84,6 +87,7 @@ const Concern = () => {
     body,
     attachment,
     filename,
+    acadYear: semesters.acadYear,
   };
 
   const clear = () => {
@@ -136,6 +140,7 @@ const Concern = () => {
 
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(studGetSemesters());
   }, [dispatch]);
 
   return (

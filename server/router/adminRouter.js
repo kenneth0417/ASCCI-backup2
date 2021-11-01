@@ -19,6 +19,9 @@ const {
   sortByCateg,
   searchAccount,
   searchCategory,
+  createSemester,
+  getSemester,
+  selectSemester,
 } = require("../controllers/adminController");
 
 router.get("/", getConcerns);
@@ -38,5 +41,8 @@ router.delete("/deleteCateg/:id", deleteCategory);
 router.get("/sort", sortByCateg);
 router.get("/searchAcc", searchAccount);
 router.get("/searchCateg", searchCategory);
+router.post("/createSem", createSemester);
+router.get("/getSem", getSemester);
+router.patch("/selectSem", selectSemester);
 
 module.exports = router;

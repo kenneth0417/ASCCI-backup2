@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 import {
   facConcerns,
   facSearch,
@@ -178,6 +179,7 @@ const Facilitator = () => {
               <TableHead>
                 <TableRow>
                   <StyledTableCell>ID</StyledTableCell>
+                  <StyledTableCell>Date</StyledTableCell>
                   <StyledTableCell>Title</StyledTableCell>
                   <StyledTableCell>Category</StyledTableCell>
                   <StyledTableCell>Status</StyledTableCell>
@@ -195,9 +197,18 @@ const Facilitator = () => {
                       }
                     >
                       <TableCell>{concern.ticket}</TableCell>
+                      <TableCell>
+                        {moment(concern.dateCreated).format("LLL")}
+                      </TableCell>
                       <TableCell>{concern.subject}</TableCell>
                       <TableCell>{concern.category}</TableCell>
-                      <TableCell>{concern.status}</TableCell>
+                      <TableCell>
+                        {concern.status !== "Pending"
+                          ? `${concern.status} - ${moment(
+                              concern.dateEvaluated
+                            ).format("LLL")}`
+                          : `${concern.status}`}
+                      </TableCell>
                     </TableRow>
                   ))}
               </TableBody>

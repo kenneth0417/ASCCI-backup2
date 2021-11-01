@@ -30,6 +30,7 @@ import AdminCateg from "./components/CategoriesNavbar/AdminCateg";
 import ReceiverProtected from "./protectedRoutes/ReceiverProtected";
 
 import { createTheme, ThemeProvider } from "@material-ui/core";
+import SetSemester from "./pages/admin/SetSemester";
 const theme = createTheme();
 
 theme.typography.h3 = {
@@ -96,7 +97,6 @@ const App = () => {
               role={user.role}
               component={Register}
             />
-            {/* <Route path="/Admin/register" component={Register} /> */}
             <AdminProtected
               path="/Admin/AddCategory"
               email={user.email}
@@ -132,6 +132,12 @@ const App = () => {
               email={user.email}
               role={user.role}
               component={AdminCateg}
+            />
+            <AdminProtected
+              path="/Admin/semester"
+              email={user.email}
+              role={user.role}
+              component={SetSemester}
             />
             <FacilitatorProtected
               exact

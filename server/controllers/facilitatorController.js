@@ -65,7 +65,13 @@ const changeStatus = async (req, res) => {
 
   const { status } = req.body;
 
-  const setStatus = { status: status };
+  let date = "";
+
+  if (status !== "Pending") {
+    date = new Date().toISOString();
+  }
+
+  const setStatus = { status: status, dateEvaluated: date };
 
   const updatedConcern = await Concerns.findByIdAndUpdate(id, setStatus, {
     new: true,
@@ -158,7 +164,15 @@ const sendEmail = async (req, res) => {
     from: "asccifacilitator@gmail.com", // sender address
     to: content.to, // list of receivers
     subject: "ASCCI", // Subject line
-    html: `<b>${content.subject}, ${content.body}, ${content.student}</b>`, // html body
+    html: `<p>Good day!</p><br />
+    <p>ASCCI : A Student's Concerns System for College of Information and Computing Sciences has a new concern available which needs your assistance. Below lists the contents of the said concern:</p>
+    <h4>Subject: <i>${content.subject}</i></h4>
+    <h4>Body: <i>${content.body}</i></h4>
+    <h4>Student: <i>${content.student}</i></h4>
+    <p>In order to reply with the concern, please click this <a href="https://ascci-webapp.netlify.app">link</a> and login to your account.</p><br />
+    <p>Thank you,</p>
+    <h4>ASCCI Facilitator</h4>
+    `, // html body
   });
 
   console.log("Message sent: %s", info.messageId);

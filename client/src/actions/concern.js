@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = "https://ascci.herokuapp.com";
+/* const url = "https://ascci.herokuapp.com"; */
+const url = "http://localhost:5000";
 
 export const createConcern = (concernData) => async (dispatch) => {
   try {
@@ -154,9 +155,12 @@ export const facReply = (id, reply) => async (dispatch) => {
 
 export const facStatus = (id, status) => async (dispatch) => {
   try {
-    const { data } = await axios.patch(`${url}/Admin/concern/${id}/status`, {
-      status,
-    });
+    const { data } = await axios.patch(
+      `${url}/Facilitator/concern/${id}/status`,
+      {
+        status,
+      }
+    );
 
     dispatch({ type: "FAC_STATUS", payload: data });
   } catch (error) {

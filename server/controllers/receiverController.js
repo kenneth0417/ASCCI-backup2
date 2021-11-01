@@ -57,7 +57,13 @@ const changeStatus = async (req, res) => {
 
   const { status } = req.body;
 
-  const setStatus = { status: status };
+  let date = "";
+
+  if (status !== "Pending") {
+    date = new Date().toISOString();
+  }
+
+  const setStatus = { status: status, dateEvaluated: date };
 
   const updatedConcern = await Concerns.findByIdAndUpdate(id, setStatus, {
     new: true,
