@@ -7,6 +7,7 @@ import { adminCateg } from "../../actions/categories";
 import { getSemesters } from "../../actions/semester";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import { Grid, Box } from "@material-ui/core";
 
 const AdminReports = () => {
   const dispatch = useDispatch();
@@ -232,187 +233,332 @@ const AdminReports = () => {
   return (
     <div>
       <Sidebar name="Reports" />
-      <div>
-        <NativeSelect
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          inputProps={{
-            name: "age",
-            id: "age-native-label-placeholder",
-          }}
-        >
-          <option value="overall">Overall</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-        </NativeSelect>
-      </div>
-      {concernLoading ? (
-        <Bar
-          style={{
-            paddingLeft: "0",
-            paddingRight: "0",
-            marginLeft: "auto",
-            marginRight: "auto",
-            display: "block",
-            width: "800px",
-            height: "60vh",
-          }}
-        />
-      ) : (
-        <Bar
-          data={concern}
-          style={{
-            paddingLeft: "0",
-            paddingRight: "0",
-            marginLeft: "auto",
-            marginRight: "auto",
-            display: "block",
-            width: "800px",
-            height: "60vh",
-          }}
-        />
-      )}
-
-      <div style={{ marginTop: "50px" }}>
-        <NativeSelect
-          value={sem}
-          onChange={(e) => setSem(e.target.value)}
-          inputProps={{
-            name: "age",
-            id: "age-native-label-placeholder",
-          }}
-        >
-          <option style={{ display: "none" }}>Select a semester</option>
-          {semesters.map((sem, idx) => (
-            <option key={idx}>{sem.acadYear}</option>
-          ))}
-        </NativeSelect>
-        {semesterLoading ? (
-          <Bar
+      <br />
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item sm={12} md={6} style={{ padding: "20px" }}>
+          <Box
             style={{
-              paddingLeft: "0",
-              paddingRight: "0",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              width: "800px",
-              height: "50vh",
+              backgroundColor: "#D8D9F6",
+              paddingTop: "5px",
+              paddingBottom: "5px",
             }}
-          />
-        ) : (
-          <Bar
-            data={semesterData}
+            textAlign="center"
+            border={2}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="black"
+          >
+            Graph of Concerns (Overall, Monthly or Weekly)
+          </Box>
+          <Box
             style={{
-              paddingLeft: "0",
-              paddingRight: "0",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              width: "800px",
-              height: "50vh",
+              backgroundColor: "white",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+              paddingTop: "10px",
+              paddingBottom: "10px",
             }}
-          />
-        )}
-      </div>
-
-      <div style={{ marginTop: "50px" }}>
-        <NativeSelect
-          value={categ}
-          onChange={(e) => setCateg(e.target.value)}
-          inputProps={{
-            name: "age",
-            id: "age-native-label-placeholder",
-          }}
-        >
-          <option style={{ display: "none" }}>Select a category</option>
-          {category.map((categ, idx) => (
-            <option key={idx}>{categ.category}</option>
-          ))}
-        </NativeSelect>
-        {categoryLoading ? (
-          <Bar
+          >
+            <center>
+              <NativeSelect
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                inputProps={{
+                  name: "age",
+                  id: "age-native-label-placeholder",
+                }}
+              >
+                <option value="overall">Overall</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+              </NativeSelect>
+            </center>
+            {concernLoading ? (
+              <Bar
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "600px",
+                  height: "40vh",
+                }}
+              />
+            ) : (
+              <Bar
+                data={concern}
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "600px",
+                  height: "40vh",
+                }}
+              />
+            )}
+          </Box>
+        </Grid>
+        <Grid item sm={12} md={6} style={{ padding: "20px" }}>
+          <Box
             style={{
-              paddingLeft: "0",
-              paddingRight: "0",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              width: "800px",
-              height: "50vh",
+              backgroundColor: "#D8D9F6",
+              paddingTop: "5px",
+              paddingBottom: "5px",
             }}
-          />
-        ) : (
-          <Bar
-            data={categoryData}
+            textAlign="center"
+            border={2}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="black"
+          >
+            Concerns per Semester
+          </Box>
+          <Box
             style={{
-              paddingLeft: "0",
-              paddingRight: "0",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              width: "800px",
-              height: "50vh",
+              backgroundColor: "white",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+              paddingTop: "10px",
+              paddingBottom: "10px",
             }}
-          />
-        )}
-      </div>
-
-      <div style={{ marginTop: "50px" }}>
-        {concernLoading ? (
-          <Pie
+          >
+            <center>
+              <NativeSelect
+                value={sem}
+                onChange={(e) => setSem(e.target.value)}
+                inputProps={{
+                  name: "age",
+                  id: "age-native-label-placeholder",
+                }}
+              >
+                <option style={{ display: "none" }}>Select a semester</option>
+                {semesters.map((sem, idx) => (
+                  <option key={idx}>{sem.acadYear}</option>
+                ))}
+              </NativeSelect>
+            </center>
+            {semesterLoading ? (
+              <Bar
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "600px",
+                  height: "40vh",
+                }}
+              />
+            ) : (
+              <Bar
+                data={semesterData}
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "600px",
+                  height: "40vh",
+                }}
+              />
+            )}
+          </Box>
+        </Grid>
+        <Box
+          component={Grid}
+          item
+          lg={3}
+          display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
+        ></Box>
+        <Grid item lg={6} style={{ padding: "10px" }}>
+          <Box
             style={{
-              paddingLeft: "0",
-              paddingRight: "0",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              width: "800px",
-              height: "50vh",
+              backgroundColor: "#D8D9F6",
+              paddingTop: "5px",
+              paddingBottom: "5px",
             }}
-          />
-        ) : (
-          <Pie
-            data={departmentData}
+            textAlign="center"
+            border={2}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="black"
+          >
+            Concerns per Category
+          </Box>
+          <Box
             style={{
-              paddingLeft: "0",
-              paddingRight: "0",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              width: "800px",
-              height: "50vh",
+              backgroundColor: "white",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+              paddingTop: "10px",
+              paddingBottom: "10px",
             }}
-          />
-        )}
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        {concernLoading ? (
-          <Pie
+          >
+            <center>
+              <NativeSelect
+                value={categ}
+                onChange={(e) => setCateg(e.target.value)}
+                inputProps={{
+                  name: "age",
+                  id: "age-native-label-placeholder",
+                }}
+              >
+                <option style={{ display: "none" }}>Select a category</option>
+                {category.map((categ, idx) => (
+                  <option key={idx}>{categ.category}</option>
+                ))}
+              </NativeSelect>
+            </center>
+            {categoryLoading ? (
+              <Bar
+                style={{
+                  paddingTop: "10px",
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "600px",
+                  height: "40vh",
+                }}
+              />
+            ) : (
+              <Bar
+                data={categoryData}
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "600px",
+                  height: "40vh",
+                }}
+              />
+            )}
+          </Box>
+        </Grid>
+        <Box
+          component={Grid}
+          item
+          lg={3}
+          display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
+        ></Box>
+        <Grid item sm={12} md={6} style={{ padding: "20px" }}>
+          <Box
             style={{
-              paddingLeft: "0",
-              paddingRight: "0",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              width: "800px",
-              height: "50vh",
+              backgroundColor: "#D8D9F6",
+              paddingTop: "5px",
+              paddingBottom: "5px",
             }}
-          />
-        ) : (
-          <Pie
-            data={statusData}
+            textAlign="center"
+            border={2}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="black"
+          >
+            Concerns per Department
+          </Box>
+          <Box
             style={{
-              paddingLeft: "0",
-              paddingRight: "0",
-              marginLeft: "auto",
-              marginRight: "auto",
-              display: "block",
-              width: "800px",
-              height: "50vh",
+              backgroundColor: "white",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+              paddingTop: "10px",
+              paddingBottom: "10px",
             }}
-          />
-        )}
-      </div>
+          >
+            {concernLoading ? (
+              <Pie
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "500px",
+                  height: "30vh",
+                }}
+              />
+            ) : (
+              <Pie
+                data={departmentData}
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "500px",
+                  height: "30vh",
+                }}
+              />
+            )}
+          </Box>
+        </Grid>
+        <Grid item sm={12} md={6} style={{ padding: "20px" }}>
+          <Box
+            style={{
+              backgroundColor: "#D8D9F6",
+              paddingTop: "5px",
+              paddingBottom: "5px",
+            }}
+            textAlign="center"
+            border={2}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="black"
+          >
+            Concerns per Status
+          </Box>
+          <Box
+            style={{
+              backgroundColor: "white",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            {concernLoading ? (
+              <Pie
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "500px",
+                  height: "30vh",
+                }}
+              />
+            ) : (
+              <Pie
+                data={statusData}
+                style={{
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  width: "500px",
+                  height: "30vh",
+                }}
+              />
+            )}
+          </Box>
+        </Grid>
+      </Grid>
+      <br />
     </div>
   );
 };

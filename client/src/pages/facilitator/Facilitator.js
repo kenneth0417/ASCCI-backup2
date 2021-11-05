@@ -117,60 +117,66 @@ const Facilitator = () => {
       <Sidebar name="Facilitator" />
       <div className={classes.root}>
         <CssBaseline />
-        <h2 style={{ textAlign: "center" }}>Concerns</h2>
-        <Box textAlign="center">
-          <Grid container spacing={1}>
-            <Grid item xs={8} sm={8} md={6}>
-              <TextField
-                size="small"
-                id="searchquery"
-                label="Search"
-                variant="outlined"
-                fullWidth
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={1} sm={1} md={1}>
-              <Button size="medium" variant="contained" onClick={test}>
-                <SearchIcon fontSize="medium"></SearchIcon>
-              </Button>
-            </Grid>
-            <Grid item xs={3} sm={3} md={5}>
-              <Typography style={{ display: "inline-block" }}>
-                Sort by: &nbsp;
-              </Typography>
-              <Select
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-                placeholder="Sort"
-              >
-                <MenuItem value="">None</MenuItem>
-                {category.map((categ, idx) => (
-                  <MenuItem value={categ.category} key={idx}>
-                    {categ.category}
-                  </MenuItem>
-                ))}
-                <MenuItem value="Pending">Pending</MenuItem>
-                <MenuItem value="Resolved">Resolved</MenuItem>
-                <MenuItem value="Unresolved">Unresolved</MenuItem>
-              </Select>
-
-              <Typography style={{ display: "inline-block" }}>
-                &nbsp;Order by: &nbsp;
-              </Typography>
-              <Select
-                id="order"
-                placeholder="orderby"
-                value={order}
-                onChange={update}
-              >
-                <MenuItem value={0}>ASC</MenuItem>
-                <MenuItem value={1}>DESC</MenuItem>
-              </Select>
-            </Grid>
+        <Grid
+          container
+          spacing={1}
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Grid item xs={12} sm={3} md={3} lg={5}>
+            <h1>Concerns</h1>
           </Grid>
-        </Box>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Typography style={{ display: "inline-block" }}>
+              Sort by: &nbsp;
+            </Typography>
+            <Select
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              placeholder="Sort"
+            >
+              <MenuItem>None</MenuItem>
+              {category.map((categ, idx) => (
+                <MenuItem value={categ.category} key={idx}>
+                  {categ.category}
+                </MenuItem>
+              ))}
+              <MenuItem value="Pending">Pending</MenuItem>
+              <MenuItem value="Resolved">Resolved</MenuItem>
+              <MenuItem value="Unresolved">Unresolved</MenuItem>
+            </Select>
+            <Typography style={{ display: "inline-block" }}>
+              &nbsp;Order by: &nbsp;
+            </Typography>
+            <Select
+              id="order"
+              placeholder="orderby"
+              value={order}
+              onChange={update}
+            >
+              <MenuItem value={0}>ASC</MenuItem>
+              <MenuItem value={1}>DESC</MenuItem>
+            </Select>
+          </Grid>
+          <Grid item xs={8} sm={4} md={3} lg={2}>
+            <TextField
+              size="small"
+              id="searchquery"
+              label="Search"
+              variant="outlined"
+              fullWidth
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={4} sm={4} md={2} lg={1}>
+            <Button size="medium" variant="contained" fullWidth onClick={test}>
+              <SearchIcon fontSize="medium"></SearchIcon>
+            </Button>
+          </Grid>
+        </Grid>
+        <hr style={{ marginTop: "10px" }}></hr>
         {isLoading ? (
           <CircularProgress />
         ) : (

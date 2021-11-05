@@ -6,9 +6,32 @@ import {
   getSemesters,
   selectSemester,
 } from "../../actions/semester";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Radio, Typography } from "@material-ui/core";
+
+import {
+  CssBaseline,
+  Grid,
+  makeStyles,
+  TextField,
+  Button,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    margin: "20px",
+  },
+  center: {
+    textAlign: "center",
+  },
+  input: {
+    display: "none",
+  },
+}));
 
 const SetSemester = () => {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
 
   const { semesters, isLoading } = useSelector((state) => state.semester);
@@ -44,35 +67,69 @@ const SetSemester = () => {
 
   return (
     <div>
+      <CssBaseline />
       <Sidebar name="Semester" />
-      <h1>Set Semester</h1>
+      <div className={classes.root}>
+        <h2>Set Semester</h2>
 
-      {isLoading ? <CircularProgress /> : <p>Selected: {selectedLabel}</p>}
-
-      <form onSubmit={selectSubmit}>
-        {semesters.map((sem, idx) => (
-          <div className="radio" key={idx}>
-            <input
-              type="radio"
-              value={sem.acadYear}
-              name="sem"
-              onChange={(e) => setSelect(e.target.value)}
-            />
-            {sem.acadYear}
-          </div>
-        ))}
-        <button type="submit">Select</button>
-      </form>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Create Semester"
-          value={sem}
-          onChange={(e) => setSem(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Typography>Selected: {selectedLabel}</Typography>
+        )}
+        <br />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={12}>
+            <form onSubmit={selectSubmit}>
+              <TextField
+                variant="outlined"
+                label="Semester"
+                size="small"
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                value={sem.acadYear}
+                onChange={(e) => setSelect(e.target.value)}
+                required
+              >
+                <option style={{ display: "none" }} />
+                {semesters.map((sem, idx) => (
+                  <option key={idx} value={sem.acadYear}>
+                    {sem.acadYear}
+                  </option>
+                ))}
+              </TextField>
+              <Button
+                type="submit"
+                variant="contained"
+                style={{ display: "inline-block", marginLeft: "10px" }}
+              >
+                Select
+              </Button>
+            </form>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                variant="outlined"
+                size="small"
+                label="Create Semester"
+                margin="none"
+                value={sem}
+                onChange={(e) => setSem(e.target.value)}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                style={{ display: "inline-block", marginLeft: "10px" }}
+              >
+                Submit
+              </Button>
+            </form>
+          </Grid>
+        </Grid>
+      </div>
     </div>
   );
 };
