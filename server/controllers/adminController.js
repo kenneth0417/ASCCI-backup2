@@ -4,6 +4,7 @@ const Semesters = require("../models/semester");
 const bcrypt = require("bcrypt");
 const Users = require("../models/user");
 const validator = require("validator");
+const nodemailer = require("nodemailer");
 
 const addCategory = async (req, res) => {
   const { category, identifier, definition } = req.body;
@@ -133,6 +134,29 @@ const replyForum = async (req, res) => {
     new: true,
   });
   res.json(updatedConcern);
+
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "asccifacilitator@gmail.com", // generated ethereal user
+      pass: "ascci123", // generated ethereal password
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: "asccifacilitator@gmail.com", // sender address
+    to: updatedConcern.student, // list of receivers
+    subject: "Your concern has a new reply.", // Subject line
+    html: `<p>Good day!</p><br />
+    <h3>This email is from ASCCI : A Student's Concerns System for College of Information and Computing Sciences</h3>
+    <p>There is a new reply to one of your concern forums. In order to reply with the concern, please click this <a href="https://ascci-webapp.netlify.app">link</a> and login to your account.</p><br />
+    <p>Thank you,</p>
+    <h4>ASCCI Team</h4>`, // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
 };
 
 const changeStatus = async (req, res) => {
