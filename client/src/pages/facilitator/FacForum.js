@@ -54,8 +54,8 @@ const customStyles = {
   },
 };
 
-const url = "https://ascci.herokuapp.com";
-/* const url = "http://localhost:5000"; */
+/* const url = "https://ascci.herokuapp.com"; */
+const url = "http://localhost:5000";
 
 const FacForum = () => {
   const classes = useStyles();
@@ -369,11 +369,13 @@ const FacForum = () => {
                     }
                   >
                     {helpers.length &&
-                      helpers.map((helper, idx) => (
-                        <MenuItem key={idx} value={helper}>
-                          {helper}
-                        </MenuItem>
-                      ))}
+                      helpers
+                        .filter((help) => !help.includes("acilitator"))
+                        .map((helper, idx) => (
+                          <MenuItem key={idx} value={helper}>
+                            {helper}
+                          </MenuItem>
+                        ))}
                   </TextField>
                   <Button
                     variant="contained"

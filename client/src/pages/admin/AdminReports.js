@@ -34,6 +34,248 @@ const AdminReports = () => {
   const [categ, setCateg] = useState("");
   const [sem, setSem] = useState("");
 
+  const monthlyValues = [];
+  const monthlyFreq = [];
+
+  const concLabels = concerns
+    .sort()
+    .map((concern) => moment(concern.dateCreated).format("MMMM"));
+  /* console.log(concLabels); */
+
+  for (let i = 0; i < concLabels.length; i++) {
+    let value = concLabels[i];
+    if (monthlyValues.includes(value)) {
+      let pos = monthlyValues.indexOf(value);
+      monthlyFreq[pos] += 1;
+    } else {
+      monthlyValues.push(value);
+      monthlyFreq.push(1);
+    }
+  }
+
+  /* console.log(monthlyValues);
+  console.log(monthlyFreq); */
+
+  const unresValues = [0, 0, 0, 0];
+  const pendValues = [0, 0, 0, 0];
+  const resValues = [0, 0, 0, 0];
+
+  for (let i = 0; i < concerns.length; i++) {
+    let val = concerns[i];
+    if (moment(val.dateCreated).format("MMMM").includes("gust")) {
+      if (val.status == "Unresolved") {
+        unresValues[0] += 1;
+      } else if (val.status == "Pending") {
+        pendValues[0] += 1;
+      } else if (val.status == "Resolved") {
+        resValues[0] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("eptember")) {
+      if (val.status == "Unresolved") {
+        unresValues[1] += 1;
+      } else if (val.status == "Pending") {
+        pendValues[1] += 1;
+      } else if (val.status == "Resolved") {
+        resValues[1] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("tober")) {
+      if (val.status == "Unresolved") {
+        unresValues[2] += 1;
+      } else if (val.status == "Pending") {
+        pendValues[2] += 1;
+      } else if (val.status == "Resolved") {
+        resValues[2] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("vember")) {
+      if (val.status == "Unresolved") {
+        unresValues[3] += 1;
+      } else if (val.status == "Pending") {
+        pendValues[3] += 1;
+      } else if (val.status == "Resolved") {
+        resValues[3] += 1;
+      }
+    }
+  }
+
+  /*  console.log(resValues);
+  console.log(pendValues);
+  console.log(unresValues); */
+
+  const firstValues = [0, 0, 0, 0];
+  const secondValues = [0, 0, 0, 0];
+  const thirdValues = [0, 0, 0, 0];
+  const fourthValues = [0, 0, 0, 0];
+
+  for (let i = 0; i < concerns.length; i++) {
+    let val = concerns[i];
+    if (moment(val.dateCreated).format("MMMM").includes("gust")) {
+      if (val.yearLevel.includes("1st")) {
+        firstValues[0] += 1;
+      } else if (val.yearLevel.includes("2nd")) {
+        secondValues[0] += 1;
+      } else if (val.yearLevel.includes("3rd")) {
+        thirdValues[0] += 1;
+      } else if (val.yearLevel.includes("4th")) {
+        fourthValues[0] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("eptember")) {
+      if (val.yearLevel.includes("1st")) {
+        firstValues[1] += 1;
+      } else if (val.yearLevel.includes("2nd")) {
+        secondValues[1] += 1;
+      } else if (val.yearLevel.includes("3rd")) {
+        thirdValues[1] += 1;
+      } else if (val.yearLevel.includes("4th")) {
+        fourthValues[1] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("tober")) {
+      if (val.yearLevel.includes("1st")) {
+        firstValues[2] += 1;
+      } else if (val.yearLevel.includes("2nd")) {
+        secondValues[2] += 1;
+      } else if (val.yearLevel.includes("3rd")) {
+        thirdValues[2] += 1;
+      } else if (val.yearLevel.includes("4th")) {
+        fourthValues[2] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("vember")) {
+      if (val.yearLevel.includes("1st")) {
+        firstValues[3] += 1;
+      } else if (val.yearLevel.includes("2nd")) {
+        secondValues[3] += 1;
+      } else if (val.yearLevel.includes("3rd")) {
+        thirdValues[3] += 1;
+      } else if (val.yearLevel.includes("4th")) {
+        fourthValues[3] += 1;
+      }
+    }
+  }
+
+  const itValues = [0, 0, 0, 0];
+  const isValues = [0, 0, 0, 0];
+  const csValues = [0, 0, 0, 0];
+
+  for (let i = 0; i < concerns.length; i++) {
+    let val = concerns[i];
+    if (moment(val.dateCreated).format("MMMM").includes("gust")) {
+      if (val.department.includes("Technology")) {
+        itValues[0] += 1;
+      } else if (val.department.includes("Systems")) {
+        isValues[0] += 1;
+      } else if (val.department.includes("Science")) {
+        csValues[0] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("eptember")) {
+      if (val.department.includes("Technology")) {
+        itValues[1] += 1;
+      } else if (val.department.includes("Systems")) {
+        isValues[1] += 1;
+      } else if (val.department.includes("Science")) {
+        csValues[1] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("tober")) {
+      if (val.department.includes("Technology")) {
+        itValues[2] += 1;
+      } else if (val.department.includes("Systems")) {
+        isValues[2] += 1;
+      } else if (val.department.includes("Science")) {
+        csValues[2] += 1;
+      }
+    }
+
+    if (moment(val.dateCreated).format("MMMM").includes("vember")) {
+      if (val.department.includes("Technology")) {
+        itValues[3] += 1;
+      } else if (val.department.includes("Systems")) {
+        isValues[3] += 1;
+      } else if (val.department.includes("Science")) {
+        csValues[3] += 1;
+      }
+    }
+  }
+
+  const monthlyData = {
+    labels: monthlyValues,
+    datasets: [
+      {
+        label: "Unresolved",
+        data: unresValues,
+        backgroundColor: ["rgba(238, 117, 117, 0.6)"],
+        stack: "Stack 0",
+      },
+      {
+        label: "Pending",
+        data: pendValues,
+        backgroundColor: ["rgba(168, 168, 168, 0.6)"],
+        stack: "Stack 0",
+      },
+      {
+        label: "Resolved",
+        data: resValues,
+        backgroundColor: ["rgba(121, 233, 106, 0.6)"],
+        stack: "Stack 0",
+      },
+      {
+        label: "1st Year",
+        data: firstValues,
+        backgroundColor: ["rgba(47, 189, 12, 0.6)"],
+        stack: "Stack 1",
+      },
+      {
+        label: "2nd Year",
+        data: secondValues,
+        backgroundColor: ["rgba(236, 253, 1, 0.6)"],
+        stack: "Stack 1",
+      },
+      {
+        label: "3rd Year",
+        data: thirdValues,
+        backgroundColor: ["rgba(2, 141, 255, 0.6)"],
+        stack: "Stack 1",
+      },
+      {
+        label: "4th Year",
+        data: fourthValues,
+        backgroundColor: ["rgba(255, 0, 0, 0.6)"],
+        stack: "Stack 1",
+      },
+      {
+        label: "Information Technology",
+        data: itValues,
+        backgroundColor: ["rgba(109, 111, 238, 0.342)"],
+        stack: "Stack 2",
+      },
+      {
+        label: "Information Systems",
+        data: isValues,
+        backgroundColor: ["rgba(111, 183, 241, 0.6)"],
+        stack: "Stack 2",
+      },
+      {
+        label: "Computer Science",
+        data: csValues,
+        backgroundColor: ["rgba(236, 166, 125, 0.6)"],
+        stack: "Stack 2",
+      },
+    ],
+  };
+
   const semesterData = {
     labels: semValues,
     datasets: [
@@ -306,6 +548,18 @@ const AdminReports = () => {
             )}
           </Box>
         </Grid>
+        <Bar
+          data={monthlyData}
+          style={{
+            paddingLeft: "0",
+            paddingRight: "0",
+            marginLeft: "auto",
+            marginRight: "auto",
+            display: "block",
+            width: "600px",
+            height: "40vh",
+          }}
+        />
         <Grid item sm={12} md={6} style={{ padding: "20px" }}>
           <Box
             style={{
