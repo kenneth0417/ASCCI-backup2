@@ -25,10 +25,10 @@ const Student = () => {
   return (
     <>
       <Sidebar name="Student" />
-      <div style={{ margin: "20px" }}>
+      <div style={{ margin: "40px" }}>
         <CssBaseline />
-        <h2 style={{ textAlign: "center" }}>Concerns</h2>
-
+        <h1>Concerns</h1>
+        <hr style={{ marginTop: "10px", marginBottom: "20px" }}></hr>
         <Grid item container xs={12} sm={12} md={12} lg={12} elevation={6}>
           {isLoading ? (
             <CircularProgress />

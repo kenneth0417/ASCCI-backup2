@@ -54,8 +54,8 @@ const customStyles = {
   },
 };
 
-/* const url = "https://ascci.herokuapp.com"; */
-const url = "http://localhost:5000";
+const url = "https://ascci.herokuapp.com";
+/* const url = "http://localhost:5000"; */
 
 const FacForum = () => {
   const classes = useStyles();
@@ -190,14 +190,79 @@ const FacForum = () => {
                               fileName={forum.filename}
                             />
                           );
-                        } else {
+                        } else if (forum.email.includes("nimda")) {
                           return (
                             <FReceive
+                              key={idx}
                               sender={forum.email}
                               message={forum.text}
                               date={moment(forum.time).fromNow()}
                               image={forum.attachment}
                               fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#FFFAF1 ",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
+                            />
+                          );
+                        } else if (
+                          forum.email.includes(".iics") ||
+                          forum.email.includes(".cics")
+                        ) {
+                          return (
+                            <FReceive
+                              key={idx}
+                              sender={forum.email}
+                              message={forum.text}
+                              date={moment(forum.time).fromNow()}
+                              image={forum.attachment}
+                              fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#FFE599",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
+                            />
+                          );
+                        } else if (forum.email.includes("swdc")) {
+                          return (
+                            <FReceive
+                              key={idx}
+                              sender={forum.email}
+                              message={forum.text}
+                              date={moment(forum.time).fromNow()}
+                              image={forum.attachment}
+                              fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#FECFF4",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
+                            />
+                          );
+                        } else if (forum.email.includes("guidance")) {
+                          return (
+                            <FReceive
+                              key={idx}
+                              sender={forum.email}
+                              message={forum.text}
+                              date={moment(forum.time).fromNow()}
+                              image={forum.attachment}
+                              fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#D8D9F6",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
                             />
                           );
                         }

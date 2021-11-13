@@ -133,14 +133,94 @@ const Forum = () => {
                               fileName={forum.filename}
                             />
                           );
-                        } else {
+                        } else if (forum.email.includes("facilitator")) {
                           return (
                             <FReceive
+                              key={idx}
                               sender={forum.email}
                               message={forum.text}
                               date={moment(forum.time).fromNow()}
                               image={forum.attachment}
                               fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#CFFEDC",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
+                            />
+                          );
+                        } else if (forum.email.includes("swdc")) {
+                          return (
+                            <FReceive
+                              key={idx}
+                              sender={forum.email}
+                              message={forum.text}
+                              date={moment(forum.time).fromNow()}
+                              image={forum.attachment}
+                              fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#FECFF4",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
+                            />
+                          );
+                        } else if (forum.email.includes("guidance")) {
+                          return (
+                            <FReceive
+                              key={idx}
+                              sender={forum.email}
+                              message={forum.text}
+                              date={moment(forum.time).fromNow()}
+                              image={forum.attachment}
+                              fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#D8D9F6",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
+                            />
+                          );
+                        } else if (forum.email.includes("nimda")) {
+                          return (
+                            <FReceive
+                              key={idx}
+                              sender={forum.email}
+                              message={forum.text}
+                              date={moment(forum.time).fromNow()}
+                              image={forum.attachment}
+                              fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#FFFAF1 ",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
+                            />
+                          );
+                        } else if (forum.email.includes("facilitator")) {
+                          return (
+                            <FReceive
+                              key={idx}
+                              sender={forum.email}
+                              message={forum.text}
+                              date={moment(forum.time).fromNow()}
+                              image={forum.attachment}
+                              fileName={forum.filename}
+                              testStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "#CFFEDC",
+                                marginBottom: "10px",
+                                maxWidth: "60%",
+                              }}
                             />
                           );
                         }

@@ -36,7 +36,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FReceive({ sender, message, date, image, fileName }) {
+export default function FReceive({
+  sender,
+  message,
+  date,
+  image,
+  fileName,
+  testStyle,
+}) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -51,15 +58,7 @@ export default function FReceive({ sender, message, date, image, fileName }) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Card
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "#FFE599",
-          marginBottom: "10px",
-          maxWidth: "60%",
-        }}
-      >
+      <Card style={testStyle}>
         <CardContent style={{ alignSelf: "flex-end" }}>
           <Typography color="textSecondary" gutterBottom>
             {sender}

@@ -38,8 +38,17 @@ const AdminReports = () => {
   const monthlyFreq = [];
 
   const concLabels = concerns
+    .map((concern) => concern.dateCreated)
     .sort()
-    .map((concern) => moment(concern.dateCreated).format("MMMM"));
+    .map((concern) => moment(concern).format("MMMM"));
+
+  const monthlyOption = {
+    plugins: {
+      legend: {
+        position: "right",
+      },
+    },
+  };
   /* console.log(concLabels); */
 
   for (let i = 0; i < concLabels.length; i++) {
@@ -216,61 +225,61 @@ const AdminReports = () => {
       {
         label: "Unresolved",
         data: unresValues,
-        backgroundColor: ["rgba(238, 117, 117, 0.6)"],
+        backgroundColor: "#de425b",
         stack: "Stack 0",
       },
       {
         label: "Pending",
         data: pendValues,
-        backgroundColor: ["rgba(168, 168, 168, 0.6)"],
+        backgroundColor: "#fcbe6e",
         stack: "Stack 0",
       },
       {
         label: "Resolved",
         data: resValues,
-        backgroundColor: ["rgba(121, 233, 106, 0.6)"],
+        backgroundColor: "#6b9a36",
         stack: "Stack 0",
       },
       {
         label: "1st Year",
         data: firstValues,
-        backgroundColor: ["rgba(47, 189, 12, 0.6)"],
+        backgroundColor: "#007A53",
         stack: "Stack 1",
       },
       {
         label: "2nd Year",
         data: secondValues,
-        backgroundColor: ["rgba(236, 253, 1, 0.6)"],
+        backgroundColor: "#F0EAE8",
         stack: "Stack 1",
       },
       {
         label: "3rd Year",
         data: thirdValues,
-        backgroundColor: ["rgba(2, 141, 255, 0.6)"],
+        backgroundColor: "#DA291C",
         stack: "Stack 1",
       },
       {
         label: "4th Year",
         data: fourthValues,
-        backgroundColor: ["rgba(255, 0, 0, 0.6)"],
+        backgroundColor: "#9EA1E9",
         stack: "Stack 1",
       },
       {
         label: "Information Technology",
         data: itValues,
-        backgroundColor: ["rgba(109, 111, 238, 0.342)"],
+        backgroundColor: "#9EC8F8",
         stack: "Stack 2",
       },
       {
         label: "Information Systems",
         data: isValues,
-        backgroundColor: ["rgba(111, 183, 241, 0.6)"],
+        backgroundColor: "#FFE599",
         stack: "Stack 2",
       },
       {
         label: "Computer Science",
         data: csValues,
-        backgroundColor: ["rgba(236, 166, 125, 0.6)"],
+        backgroundColor: "#FEC00F",
         stack: "Stack 2",
       },
     ],
@@ -482,6 +491,59 @@ const AdminReports = () => {
         justifyContent="center"
         alignItems="center"
       >
+        <Box
+          component={Grid}
+          item
+          lg={2}
+          display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
+        ></Box>
+        <Grid item sm={12} md={8} style={{ padding: "20px" }}>
+          <Box
+            style={{
+              backgroundColor: "#D8D9F6",
+              paddingTop: "5px",
+              paddingBottom: "5px",
+            }}
+            textAlign="center"
+            border={2}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="black"
+          >
+            Graph of Concerns
+          </Box>
+          <Box
+            style={{
+              backgroundColor: "white",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <Bar
+              data={monthlyData}
+              style={{
+                paddingLeft: "0",
+                paddingRight: "0",
+                marginLeft: "10px",
+                marginRight: "10px",
+                display: "block",
+                width: "700px",
+                height: "80vh",
+              }}
+              options={monthlyOption}
+            />
+          </Box>
+        </Grid>
+
+        <Box
+          component={Grid}
+          item
+          lg={2}
+          display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
+        ></Box>
+
         <Grid item sm={12} md={6} style={{ padding: "20px" }}>
           <Box
             style={{
@@ -548,18 +610,7 @@ const AdminReports = () => {
             )}
           </Box>
         </Grid>
-        <Bar
-          data={monthlyData}
-          style={{
-            paddingLeft: "0",
-            paddingRight: "0",
-            marginLeft: "auto",
-            marginRight: "auto",
-            display: "block",
-            width: "600px",
-            height: "40vh",
-          }}
-        />
+
         <Grid item sm={12} md={6} style={{ padding: "20px" }}>
           <Box
             style={{

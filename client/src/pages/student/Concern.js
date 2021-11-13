@@ -21,12 +21,13 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    margin: "40px",
   },
   paper: {
     padding: theme.spacing(2),
     /* textAlign: 'center', */
     color: theme.palette.text.secondary,
-    margin: 40,
+    marginTop: "20px",
     /*  maxWidth: "85%", */
   },
   center: {
@@ -147,150 +148,165 @@ const Concern = () => {
     <div>
       <Sidebar name="Forums" />
       <CssBaseline />
-      <h2 className={classes.center}>New Concern</h2>
-      <Paper className={classes.paper} alignitems="center" justify="center">
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={12} md={6}>
-              <TextField
-                variant="outlined"
-                label="Subject"
-                size="small"
-                margin="normal"
-                fullWidth
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                required
-              ></TextField>
-            </Grid>
-            <Grid item xs={12} sm={12} md={6}>
-              <TextField
-                variant="outlined"
-                label="Category"
-                size="small"
-                margin="normal"
-                fullWidth
-                select
-                SelectProps={{
-                  native: true,
-                }}
-                value={conCategory}
-                onChange={(e) => setConCategory(e.target.value)}
-                required
-              >
-                <option style={{ display: "none" }} />
-                {category.map((category, idx) => (
-                  <option key={idx} value={category.identifier}>
-                    {category.category}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item xs={12} sm={12} md={6}>
-              <TextField
-                variant="outlined"
-                label="Department"
-                size="small"
-                margin="dense"
-                fullWidth
-                select
-                SelectProps={{
-                  native: true,
-                }}
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-                required
-              >
-                <option style={{ display: "none" }} />
-                <option value="Computer Science">Computer Science</option>
-                <option value="Information Systems">Information Systems</option>
-                <option value="Information Technology">
-                  Information Technology
-                </option>
-              </TextField>
-            </Grid>
-            <Grid item xs={12} sm={12} md={6}>
-              <TextField
-                variant="outlined"
-                label="Year Level"
-                size="small"
-                margin="dense"
-                fullWidth
-                select
-                SelectProps={{
-                  native: true,
-                }}
-                value={yearLevel}
-                onChange={(e) => setYearLevel(e.target.value)}
-                required
-              >
-                <option style={{ display: "none" }} />
-                <option value="1st Year">1st Year</option>
-                <option value="2nd Year">2nd Year</option>
-                <option value="3rd Year">3rd Year</option>
-                <option value="4th Year">4th Year</option>
-              </TextField>
-            </Grid>
-            <Grid item xs={12} sm={12} md={12}>
-              <TextField
-                variant="outlined"
-                label="Concern"
-                size="small"
-                margin="normal"
-                multiline
-                rows={6}
-                fullWidth
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                required
-              ></TextField>
-            </Grid>
-            <Grid item xs={2} sm={1} md={1} style={{ textAlign: "center" }}>
-              <input
-                className={classes.input}
-                id="file-upload"
-                type="file"
-                onChange={onFileChange}
-              />
-              <label htmlFor="file-upload">
-                <IconButton size="medium" edge="start" component="span">
-                  <AttachFileIcon fontSize="medium" />
-                </IconButton>
-              </label>
-            </Grid>
-            <Grid item xs={2} sm={1} md={1} style={{ textAlign: "center" }}>
-              <label htmlFor="image-upload">
-                <p>{filename}</p>
-              </label>
-            </Grid>
-            <Grid item xs={8} sm={8} md={10} style={{ textAlign: "right" }}>
-              <IconButton size="medium" color="primary" type="submit">
-                <SendIcon fontSize="medium" />
-              </IconButton>
-            </Grid>
-            <Modal
-              isOpen={modalOpen}
-              onRequestClose={() => setModalOpen(false)}
-              style={customStyles}
-            >
-              <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                <button
-                  className="modalBtn"
-                  onClick={() => setModalOpen(false)}
-                >
-                  X
-                </button>
-              </div>
-
-              <div style={{ margin: "20px" }}>
-                <p style={{ fontSize: "24px" }}>
-                  Your concern has been successfully submitted.
-                </p>
-              </div>
-            </Modal>
+      <div className={classes.root}>
+        <Grid
+          container
+          spacing={1}
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Grid item xs={12} sm={3} md={3} lg={5}>
+            <h1>Add New Concern</h1>
           </Grid>
-        </form>
-      </Paper>
+        </Grid>
+        <hr style={{ marginTop: "10px" }}></hr>
+        <Paper className={classes.paper} alignitems="center" justify="center">
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12} md={6}>
+                <TextField
+                  variant="outlined"
+                  label="Subject"
+                  size="small"
+                  margin="normal"
+                  fullWidth
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  required
+                ></TextField>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <TextField
+                  variant="outlined"
+                  label="Category"
+                  size="small"
+                  margin="normal"
+                  fullWidth
+                  select
+                  SelectProps={{
+                    native: true,
+                  }}
+                  value={conCategory}
+                  onChange={(e) => setConCategory(e.target.value)}
+                  required
+                >
+                  <option style={{ display: "none" }} />
+                  {category.map((category, idx) => (
+                    <option key={idx} value={category.identifier}>
+                      {category.category}
+                    </option>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <TextField
+                  variant="outlined"
+                  label="Department"
+                  size="small"
+                  margin="dense"
+                  fullWidth
+                  select
+                  SelectProps={{
+                    native: true,
+                  }}
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                  required
+                >
+                  <option style={{ display: "none" }} />
+                  <option value="Computer Science">Computer Science</option>
+                  <option value="Information Systems">
+                    Information Systems
+                  </option>
+                  <option value="Information Technology">
+                    Information Technology
+                  </option>
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <TextField
+                  variant="outlined"
+                  label="Year Level"
+                  size="small"
+                  margin="dense"
+                  fullWidth
+                  select
+                  SelectProps={{
+                    native: true,
+                  }}
+                  value={yearLevel}
+                  onChange={(e) => setYearLevel(e.target.value)}
+                  required
+                >
+                  <option style={{ display: "none" }} />
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year">2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12}>
+                <TextField
+                  variant="outlined"
+                  label="Concern"
+                  size="small"
+                  margin="normal"
+                  multiline
+                  rows={6}
+                  fullWidth
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                  required
+                ></TextField>
+              </Grid>
+              <Grid item xs={2} sm={1} md={1} style={{ textAlign: "center" }}>
+                <input
+                  className={classes.input}
+                  id="file-upload"
+                  type="file"
+                  onChange={onFileChange}
+                />
+                <label htmlFor="file-upload">
+                  <IconButton size="medium" edge="start" component="span">
+                    <AttachFileIcon fontSize="medium" />
+                  </IconButton>
+                </label>
+              </Grid>
+              <Grid item xs={2} sm={1} md={1} style={{ textAlign: "center" }}>
+                <label htmlFor="image-upload">
+                  <p>{filename}</p>
+                </label>
+              </Grid>
+              <Grid item xs={8} sm={8} md={10} style={{ textAlign: "right" }}>
+                <IconButton size="medium" color="primary" type="submit">
+                  <SendIcon fontSize="medium" />
+                </IconButton>
+              </Grid>
+              <Modal
+                isOpen={modalOpen}
+                onRequestClose={() => setModalOpen(false)}
+                style={customStyles}
+              >
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <button
+                    className="modalBtn"
+                    onClick={() => setModalOpen(false)}
+                  >
+                    X
+                  </button>
+                </div>
+
+                <div style={{ margin: "20px" }}>
+                  <p style={{ fontSize: "24px" }}>
+                    Your concern has been successfully submitted.
+                  </p>
+                </div>
+              </Modal>
+            </Grid>
+          </form>
+        </Paper>
+      </div>
     </div>
   );
 };
