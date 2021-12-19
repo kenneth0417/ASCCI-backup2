@@ -22,6 +22,9 @@ const {
   createSemester,
   getSemester,
   selectSemester,
+  createEmail,
+  getEmail,
+  deleteEmail,
 } = require("../controllers/adminController");
 
 router.get("/", getConcerns);
@@ -44,5 +47,8 @@ router.get("/searchCateg", searchCategory);
 router.post("/createSem", createSemester);
 router.get("/getSem", getSemester);
 router.patch("/selectSem", selectSemester);
+router.post("/createEmail", createEmail);
+router.get("/getEmail", getEmail);
+router.delete("/deleteEmail/:id", deleteEmail);
 
 module.exports = router;

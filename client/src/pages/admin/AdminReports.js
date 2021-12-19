@@ -65,9 +65,9 @@ const AdminReports = () => {
   /* console.log(monthlyValues);
   console.log(monthlyFreq); */
 
-  const unresValues = [0, 0, 0, 0];
-  const pendValues = [0, 0, 0, 0];
-  const resValues = [0, 0, 0, 0];
+  const unresValues = [0, 0, 0, 0, 0];
+  const pendValues = [0, 0, 0, 0, 0];
+  const resValues = [0, 0, 0, 0, 0];
 
   for (let i = 0; i < concerns.length; i++) {
     let val = concerns[i];
@@ -110,16 +110,26 @@ const AdminReports = () => {
         resValues[3] += 1;
       }
     }
+
+    if (moment(val.dateCreated).format("MMMM").includes("cember")) {
+      if (val.status == "Unresolved") {
+        unresValues[4] += 1;
+      } else if (val.status == "Pending") {
+        pendValues[4] += 1;
+      } else if (val.status == "Resolved") {
+        resValues[4] += 1;
+      }
+    }
   }
 
   /*  console.log(resValues);
   console.log(pendValues);
   console.log(unresValues); */
 
-  const firstValues = [0, 0, 0, 0];
-  const secondValues = [0, 0, 0, 0];
-  const thirdValues = [0, 0, 0, 0];
-  const fourthValues = [0, 0, 0, 0];
+  const firstValues = [0, 0, 0, 0, 0];
+  const secondValues = [0, 0, 0, 0, 0];
+  const thirdValues = [0, 0, 0, 0, 0];
+  const fourthValues = [0, 0, 0, 0, 0];
 
   for (let i = 0; i < concerns.length; i++) {
     let val = concerns[i];
@@ -170,11 +180,23 @@ const AdminReports = () => {
         fourthValues[3] += 1;
       }
     }
+
+    if (moment(val.dateCreated).format("MMMM").includes("cember")) {
+      if (val.yearLevel.includes("1st")) {
+        firstValues[4] += 1;
+      } else if (val.yearLevel.includes("2nd")) {
+        secondValues[4] += 1;
+      } else if (val.yearLevel.includes("3rd")) {
+        thirdValues[4] += 1;
+      } else if (val.yearLevel.includes("4th")) {
+        fourthValues[4] += 1;
+      }
+    }
   }
 
-  const itValues = [0, 0, 0, 0];
-  const isValues = [0, 0, 0, 0];
-  const csValues = [0, 0, 0, 0];
+  const itValues = [0, 0, 0, 0, 0];
+  const isValues = [0, 0, 0, 0, 0];
+  const csValues = [0, 0, 0, 0, 0];
 
   for (let i = 0; i < concerns.length; i++) {
     let val = concerns[i];
@@ -217,10 +239,22 @@ const AdminReports = () => {
         csValues[3] += 1;
       }
     }
+
+    if (moment(val.dateCreated).format("MMMM").includes("cember")) {
+      if (val.department.includes("Technology")) {
+        itValues[4] += 1;
+      } else if (val.department.includes("Systems")) {
+        isValues[4] += 1;
+      } else if (val.department.includes("Science")) {
+        csValues[4] += 1;
+      }
+    }
   }
 
   const monthlyData = {
-    labels: monthlyValues,
+    labels: monthlyValues.map((month) => {
+      return `${month} 2021`;
+    }),
     datasets: [
       {
         label: "Unresolved",

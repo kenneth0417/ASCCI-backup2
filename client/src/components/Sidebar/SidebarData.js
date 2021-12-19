@@ -6,6 +6,7 @@ import EqualizerRoundedIcon from "@material-ui/icons/EqualizerRounded";
 import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import NoteAddRoundedIcon from "@material-ui/icons/NoteAddRounded";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import EmailIcon from "@material-ui/icons/Email";
 
 export const StudentData = [
   {
@@ -56,6 +57,12 @@ export const AdminData = [
     title: "Semester",
     path: "/Admin/semester",
     icon: <CalendarTodayIcon />,
+    cName: "nav-text",
+  },
+  {
+    title: "Email",
+    path: "/Admin/email",
+    icon: <EmailIcon />,
     cName: "nav-text",
   },
   {

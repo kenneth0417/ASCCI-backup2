@@ -30,6 +30,7 @@ import {
 import logo from "../images/ustlogo.png";
 import logo2 from "../images/cicslogo.png";
 import ASCCIlogo from "../images/logo-dark.png";
+import { getEmail } from "../actions/emails";
 
 const clientId =
   "345626656367-poa5188tsnn1itv6uqbssonceii8pik9.apps.googleusercontent.com";
@@ -112,6 +113,10 @@ const Login = () => {
 
   const user = useSelector((state) => state.user);
 
+  const { emails } = useSelector((state) => state.emails);
+
+  const arr = emails.map((email) => email.email);
+
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -143,10 +148,7 @@ const Login = () => {
     const image = res.profileObj.imageUrl;
     setImage(res.profileObj.imageUrl);
     try {
-      if (
-        res.profileObj.email.includes(".iics@ust.edu.ph") ||
-        res.profileObj.email.includes(".cics@ust.edu.ph")
-      ) {
+      if (arr.find((ar) => res.profileObj.email.includes(ar)) != null) {
         alert("Success! Welcome to ASCCI!");
         await axios.post(
           `${url}/auth/googlelogin`,
@@ -182,6 +184,7 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(getUser());
+    dispatch(getEmail());
     if (!user) {
       dispatch(getUser());
     } else {

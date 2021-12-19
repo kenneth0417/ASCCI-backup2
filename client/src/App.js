@@ -31,6 +31,7 @@ import ReceiverProtected from "./protectedRoutes/ReceiverProtected";
 
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import SetSemester from "./pages/admin/SetSemester";
+import SetEmail from "./pages/admin/SetEmail";
 const theme = createTheme();
 
 theme.typography.h3 = {
@@ -138,6 +139,12 @@ const App = () => {
               email={user.email}
               role={user.role}
               component={SetSemester}
+            />
+            <AdminProtected
+              path="/Admin/email"
+              email={user.email}
+              role={user.role}
+              component={SetEmail}
             />
             <FacilitatorProtected
               exact

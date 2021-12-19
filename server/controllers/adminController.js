@@ -1,6 +1,7 @@
 const Categories = require("../models/categories");
 const Concerns = require("../models/concern");
 const Semesters = require("../models/semester");
+const Emails = require("../models/email");
 const bcrypt = require("bcrypt");
 const Users = require("../models/user");
 const validator = require("validator");
@@ -352,6 +353,32 @@ const selectSemester = async (req, res) => {
   res.json(latest);
 };
 
+const createEmail = async (req, res) => {
+  const { email } = req.body;
+
+  const newEmail = new Emails({ email });
+
+  const savedEmail = await newEmail.save();
+
+  res.json(savedEmail);
+};
+
+const getEmail = async (req, res) => {
+  const email = await Emails.find();
+
+  res.json(email);
+};
+
+const deleteEmail = async (req, res) => {
+  const { id } = req.params;
+
+  await Emails.findByIdAndDelete(id);
+
+  const updated = await Emails.find();
+
+  res.json(updated);
+};
+
 module.exports = {
   addCategory,
   register,
@@ -373,4 +400,7 @@ module.exports = {
   createSemester,
   getSemester,
   selectSemester,
+  createEmail,
+  getEmail,
+  deleteEmail,
 };

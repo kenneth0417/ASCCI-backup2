@@ -5,6 +5,7 @@ import concern from "./concern";
 import categories from "./categories";
 import accounts from "./accounts";
 import semester from "./semester";
+import emails from "./emails";
 
 export const reducers = combineReducers({
   user,
@@ -12,4 +13,5 @@ export const reducers = combineReducers({
   categories,
   accounts,
   semester,
+  emails
 });
